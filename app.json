@@ -15,8 +15,8 @@
       "index",
       "inline"
     ],
-    "website": "https://github.com/GouthamSER/KuttuBot",
-    "repository": "https://github.com/GouthamSER/KuttuBot",
+    "website": "https://github.com/GouthamSER/EDITINGREPO",
+    "repository": "https://github.com/GouthamSER/EDITINGREPO",
     "env": {
         "BOT_TOKEN": {
             "description": "Your bot token.",

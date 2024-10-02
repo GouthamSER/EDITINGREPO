@@ -366,42 +366,42 @@ async def auto_filter(client, msg, spoll=False):
             ]
             for file in files
         ]
-    else:
-        btn = [
-            [
-                InlineKeyboardButton(
-                    text=f"{file.file_name}",
-                    callback_data=f'{pre}#{file.file_id}',
-                ),
-                InlineKeyboardButton(
-                    text=f"{get_size(file.file_size)}",
-                    callback_data=f'{pre}#{file.file_id}',
-                ),
-            ]
-            for file in files
+else:
+    btn = [
+        [
+            InlineKeyboardButton(
+                text=f"{file.file_name}",
+                callback_data=f'{pre}#{file.file_id}',
+            ),
+            InlineKeyboardButton(
+                text=f"{get_size(file.file_size)}",
+                callback_data=f'{pre}#{file.file_id}',
+            ),
         ]
+        for file in files
+    ]
 
-    if offset != "":
-        key = f"{message.chat.id}-{message.id}"
-        BUTTONS[key] = search
-        req = message.from_user.id if message.from_user else 0
-        btn.append(
+if offset != "":
+    key = f"{message.chat.id}-{message.id}"
+    BUTTONS[key] = search
+    req = message.from_user.id if message.from_user else 0
+    btn.append(
             [InlineKeyboardButton(text=f"📃 1/{math.ceil(int(total_results) / 10)}", callback_data="pages"),
              InlineKeyboardButton(text="NEXT ▶️", callback_data=f"next_{req}_{key}_{offset}")]
         )
-    else:
-        btn.append(
+else:
+    btn.append(
             [InlineKeyboardButton(text="📃 1/1", callback_data="pages")]
         )
-    else:
-        cap = script.RESULT_TXT.format(search) #result for group
-            await message.reply_photo(caption=cap[:1024], reply_markup=InlineKeyboardMarkup(btn))
-        except Exception as e:
-            logger.exception(e)
-            await message.reply_text(cap, reply_markup=InlineKeyboardMarkup(btn))
-    else:
+else:
+    cap = script.RESULT_TXT.format(search) #result for group
+        await message.reply_photo(caption=cap[:1024], reply_markup=InlineKeyboardMarkup(btn))
+    except Exception as e:
+        logger.exception(e)
         await message.reply_text(cap, reply_markup=InlineKeyboardMarkup(btn))
-    if spoll:
+else:
+    await message.reply_text(cap, reply_markup=InlineKeyboardMarkup(btn))
+if spoll:
         await msg.message.delete()
 
 #SPELL CHECK RE EDITED BY GOUTHAMSER

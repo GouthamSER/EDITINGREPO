@@ -354,11 +354,7 @@ async def auto_filter(client, msg, spoll=False):
             search = message.text
             files, offset, total_results = await get_search_results(search.lower(), offset=0, filter=True)
             if not files:
-                    return await advantage_spell_chok(client, msg)
-                else:
-                    return
-        else:
-            return
+                    return await advantage_spell_chok(client, msg) 
     else:
         message = msg.message.reply_to_message  # msg will be callback query
         search, files, offset, total_results = spoll
